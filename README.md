@@ -1,6 +1,9 @@
 # Task List (Rails 8)
 
+
 Prosta lista zadań z CRUD, terminami i akcją „Mark as done”.
+
+<img width="726" height="384" alt="obraz" src="https://github.com/user-attachments/assets/042843f9-923c-4296-b7ce-281badb479f3" />
 
 ## Features
 - CRUD dla zadań (`title`, `description`, `completed` (domyślnie `false`), `due_date`)

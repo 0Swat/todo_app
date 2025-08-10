@@ -1,24 +1,21 @@
-# README
+# Task List (Rails 7)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Prosta lista zadań z CRUD, terminami i akcją „Mark as done”.
 
-Things you may want to cover:
+## Features
+- CRUD dla zadań (`title`, `description`, `completed` (domyślnie `false`), `due_date`)
+- Przycisk **Oznacz jako wykonane** (`PATCH /tasks/:id/complete`)
+- Sortowanie (niewykonane → wykonane, termin rosnąco)
+- Walidacje + ziarna danych (seeds)
+- Responsywny UI w Tailwind CSS
+- Strona główna: `/` → lista zadań
 
-* Ruby version
+## Tech stack
+- Ruby 3+, Rails 7+
+- Tailwind CSS (importmap)
+- SQLite (dev)
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Wymagania
+- Ruby 3.x, Bundler
+- SQLite3
+- (Opcjonalnie) Foreman do `bin/dev`

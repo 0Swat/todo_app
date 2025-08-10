@@ -1,0 +1,73 @@
+<div class="container-narrow">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">Lista zadań</h1>
+    <%= link_to "Nowe zadanie", new_task_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="card">
+    <div class="card-body overflow-x-auto">
+      <table class="table">
+        <thead class="bg-gray-50 sticky top-0">
+          <tr>
+            <th class="th">Tytuł</th>
+            <th class="th">Status</th>
+            <th class="th">Termin</th>
+            <th class="th text-right">Akcje</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <% @tasks.each do |task| %>
+            <tr class="even:bg-white odd:bg-gray-50 <%= 'opacity-70' if task.completed? %>">
+              <td class="td">
+                <div class="font-medium <%= 'line-through' if task.completed? %>"><%= task.title %></div>
+                <% if task.description.present? %>
+                  <div class="text-sm text-gray-500"><%= truncate(task.description, length: 120) %></div>
+                <% end %>
+              </td>
+              <td class="td">
+                <% if task.completed? %>
+                  <span class="badge badge-success">Wykonane</span>
+                <% else %>
+                  <span class="badge badge-warn">W toku</span>
+                <% end %>
+              </td>
+              <td class="td">
+                <% if task.due_date.present? %>
+                  <span class="<%= 'text-red-600 font-semibold' if !task.completed? && task.due_date < Date.current %>">
+                    <%= l(task.due_date) %>
+                  </span>
+                <% else %>
+                  <span class="badge badge-muted">Brak</span>
+                <% end %>
+              </td>
+              <td class="td">
+                <div class="flex gap-2 justify-end">
+                  <%= link_to "Pokaż", task, class: "btn btn-secondary" %>
+                  <%= link_to "Edytuj", edit_task_path(task), class: "btn btn-secondary" %>
+                  <% unless task.completed? %>
+                    <%= button_to "✓ Oznacz jako wykonane",
+                                  complete_task_path(task),
+                                  method: :patch,
+                                  form: { data: { turbo_confirm: "Na pewno oznaczyć jako wykonane?" } },
+                                  class: "btn btn-primary" %>
+                  <% end %>
+                  <%= button_to "🗑 Usuń",
+                                task,
+                                method: :delete,
+                                form: { data: { turbo_confirm: "Usunąć to zadanie?" } },
+                                class: "btn btn-danger" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <% if @tasks.empty? %>
+        <div class="text-center text-gray-500 py-8">
+          Brak zadań. <%= link_to "Dodaj pierwsze", new_task_path, class: "underline" %>.
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

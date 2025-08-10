@@ -1,4 +1,4 @@
-# Task List (Rails 7)
+# Task List (Rails 8)
 
 Prosta lista zadań z CRUD, terminami i akcją „Mark as done”.
 
